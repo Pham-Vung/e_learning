@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #17ACAC;
+}
+
+header .link {
+    display: flex;
+    gap: 2rem;
+}
+
+header .link a {
+    text-decoration-color: #FFFFFF;
+    color: #444444;
+    transition: 0.3s;
+}
+
+header .link a:hover {
+    color: #17ACAC;
+    text-decoration-color: #17ACAC;
+}
+
+/* Moblie */
+@media (max-width: 46.25em) {
+    header .logo {
+        font-size: 16px;
+    }
+
+    header .link {
+        gap: 0.5rem;
+        font-size: 12px;
+    }
+}
