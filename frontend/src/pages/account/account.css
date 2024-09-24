@@ -1,0 +1,45 @@
+.profile {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    margin: 185px auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.profile .profile-info {
+    text-align: left;
+    margin: auto;
+}
+
+.profile .profile-info p {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.profile-info p strong {
+    color: #17ACAC;
+}
+
+.profile-info button {
+    width: 100%;
+}
+
+.profile-info .logout-btn {
+    background-color: red;
+}
+
+.profile-info .logout-btn:hover {
+    background-color: rgba(255, 0, 0, 0.69);
+}
+
+@media (max-width: 46.25em) {
+    .profile {
+        padding: 10px;
+        width: 80%;
+        margin: 90px auto;
+    }
+}
