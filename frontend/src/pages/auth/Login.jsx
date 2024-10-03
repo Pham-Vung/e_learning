@@ -40,7 +40,7 @@ const Login = () => {
                         className='common-btn'
                         disabled={btnLoading}
                     >
-                        {btnLoading? "Please wait..." : "Login"}
+                        {btnLoading ? "Please wait..." : "Login"}
                     </button>
                 </form>
                 <p>

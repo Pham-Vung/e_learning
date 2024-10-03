@@ -18,7 +18,7 @@ const Home = () => {
               navigate("/courses");
             }}
           >
-            Vist Courses
+            Visit Courses
           </button>
         </div>
       </div>

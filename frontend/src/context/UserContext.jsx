@@ -3,12 +3,16 @@ import axios from "axios";
 import { server } from "../main";
 import toast, { Toaster } from "react-hot-toast";
 
+/**
+ * Chia sẻ trạng thái giữa các component trong ứng dụng
+ * mà không cần truyền props qua nhiều component. UserContext lưu thông tin user
+ */
 const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState([]);
     const [isAuth, setIsAuth] = useState(false);
-    const [btnLoading, setBtnLoading] = useState(false);
+    const [btnLoading, setBtnLoading] = useState(false);// trạng thái nút button khi đăng nhập
     const [loading, setLoading] = useState(true);
 
     async function loginUser(email, password, navigate) {
@@ -16,19 +20,51 @@ export const UserContextProvider = ({ children }) => {
         try {
             const { data } = await axios.post(`${server}/api/user/login`, { email, password });
 
-            toast.success(data.message);
+            toast.success(data.message);// thông báo login thành công
             localStorage.setItem("token", data.token);
             setUser(data.user);
             setIsAuth(true);
             setBtnLoading(false);
-            navigate("/")
+            navigate("/");
         } catch (error) {
-            console.log(error);
+            setBtnLoading(false);
             setIsAuth(false);
             toast.error(error.response.data.mesage);
         }
     }
 
+    const registerUser = async (name, email, password, navigate) => {
+        setBtnLoading(true);
+        try {
+            const { data } = await axios.post(`${server}/api/user/register`, { name, email, password });
+
+            toast.success(data.message);
+            localStorage.setItem("activationToken", data.activationToken);
+            setBtnLoading(false);
+            navigate("/verify");
+        } catch (error) {
+            setBtnLoading(false);
+            toast.error(error.response.data.mesage);
+        }
+    }
+
+    const verifyOtp = async(otp, navigate) => {
+        setBtnLoading(true);
+        const activationToken = localStorage.getItem("activationToken");
+        try {
+            const { data } = await axios.post(`${server}/api/user/verify`, { otp, activationToken });
+
+            toast.success(data.message);
+            navigate("/login");
+            localStorage.clear();
+            setBtnLoading(false);
+        } catch (error) {
+            toast.error(error.response.data.mesage);
+            setBtnLoading(false);
+        }
+    }
+
+    // Lấy ra thông tin user
     const fetchUser = async () => {
         try {
             const { data } = await axios.get(`${server}/api/user/me`, {
@@ -59,7 +95,9 @@ export const UserContextProvider = ({ children }) => {
                 isAuth,
                 loginUser,
                 btnLoading,
-                loading
+                loading,
+                registerUser,
+                verifyOtp
             }}
         >
             {children}

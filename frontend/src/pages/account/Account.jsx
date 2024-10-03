@@ -15,7 +15,7 @@ const Account = ({ user }) => {
         localStorage.clear()
         setUser([]);
         setIsAuth(false);
-        toast.success("Log out");
+        toast.success("Logged out");
         navigate("/login");
     }
 
