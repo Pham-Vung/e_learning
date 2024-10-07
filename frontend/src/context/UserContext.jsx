@@ -48,7 +48,7 @@ export const UserContextProvider = ({ children }) => {
         }
     }
 
-    const verifyOtp = async(otp, navigate) => {
+    const verifyOtp = async (otp, navigate) => {
         setBtnLoading(true);
         const activationToken = localStorage.getItem("activationToken");
         try {

@@ -20,7 +20,7 @@ const Footer = () => {
             <a href="https://www.instagram.com/vung.phamvan.5036/">
               <AiFillInstagram />
             </a>
-            
+
             <a href="https://www.tiktok.com/@phamvanvan32">
               <AiFillTikTok />
             </a>
