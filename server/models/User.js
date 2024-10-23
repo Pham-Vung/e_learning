@@ -22,7 +22,7 @@ const schema = new mongoose.Schema(
         subscription: [//đã tham gia bao nhiêu khóa học
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Course",
+                ref: "Courses",
             },
         ],
     },

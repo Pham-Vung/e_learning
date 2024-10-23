@@ -37,9 +37,10 @@ export const isAdmin = (request, response, next) => {
                 message: "You are not admin"
             });
         }
- 
+
         next();
     } catch (error) {
+        console.log("Lỗi");
         response.status(500).json({
             message: error.message
         });

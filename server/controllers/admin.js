@@ -101,3 +101,19 @@ export const deleteCourse = TryCatch(async (request, response) => {
         message: "Course deleted"
     });
 });
+
+export const getAllStatus = TryCatch(async (request, response) => {
+    const totalCourses = (await Courses.find()).length;
+    const totalLectures = (await Lecture.find()).length;
+    const totalUsers = (await User.find()).length;
+
+    const status = {
+        totalCourses,
+        totalLectures,
+        totalUsers
+    };
+
+    response.json({
+        status
+    });
+});
