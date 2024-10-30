@@ -14,7 +14,6 @@ const CourseStudy = ({ user }) => {
         return navigate("/");
     }
 
-
     useEffect(() => {
         fetchCourse(params.id);
     }, []);

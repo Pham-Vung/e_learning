@@ -6,7 +6,6 @@ import { server } from '../../main';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Loading from '../../components/loading/Loading';
-import { UserData } from '../../context/UserContext';
 
 const CourseDescription = ({ user }) => {
     const params = useParams();
@@ -14,8 +13,7 @@ const CourseDescription = ({ user }) => {
 
     const [loading, setLoading] = useState(false);
 
-    const { fetchUser } = UserData();
-    const { fetchCourse, course, fetchCourses, fetchMyCourse } = CourseData();
+    const { fetchCourse, course } = CourseData();
 
     useEffect(() => {
         fetchCourse(params.id);
@@ -26,25 +24,18 @@ const CourseDescription = ({ user }) => {
         setLoading(true);
 
         try {
-
             const response = await axios.post(`${server}/api/course/checkout/${params.id}`, {}, {
                 headers: {
                     token
                 }
             });
 
-            // fetchUser();
-            // fetchCourses();
-            // fetchMyCourse();
-            // toast.success(data.message);
             setLoading(false);
             window.location.href = response.data.payUrl;
-            // navigate(`/payment-success/${params.id}`)
         } catch (error) {
             toast.error(error.data.message);
             setLoading(false);
         }
-
     }
 
     return (

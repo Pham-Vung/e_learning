@@ -9,6 +9,7 @@ export const CourseContextProvider = ({ children }) => {
     const [course, setCourse] = useState([]);
     const [mycourse, setMycourse] = useState([]);
 
+    // lấy ra tất cả khóa học
     const fetchCourses = async () => {
         try {
             const { data } = await axios.get(`${server}/api/course/all`);
@@ -19,6 +20,7 @@ export const CourseContextProvider = ({ children }) => {
         }
     }
 
+    // lấy ra thông tin của khóa học
     const fetchCourse = async (id) => {
         try {
             const { data } = await axios.get(`${server}/api/course/${id}`);
@@ -28,6 +30,7 @@ export const CourseContextProvider = ({ children }) => {
         }
     }
 
+    // lấy ra khóa học của user
     const fetchMyCourse = async () => {
         try {
             const { data } = await axios.get(`${server}/api/mycourse`, {
@@ -35,7 +38,7 @@ export const CourseContextProvider = ({ children }) => {
                     token: localStorage.getItem("token")
                 }
             });
-            
+
             setMycourse(data.courses);
         } catch (error) {
             console.log(error);
@@ -46,7 +49,20 @@ export const CourseContextProvider = ({ children }) => {
         fetchCourses();
         fetchMyCourse();
     }, [])
-    return <CourseContext.Provider value={{ courses, fetchCourses, fetchCourse, course, mycourse, fetchMyCourse }}>{children}</CourseContext.Provider>
+    return (
+        <CourseContext.Provider
+            value={{
+                courses,
+                fetchCourses,
+                fetchCourse,
+                course,
+                mycourse,
+                fetchMyCourse
+            }}
+        >
+            {children}
+        </CourseContext.Provider>
+    );
 };
 
 export const CourseData = () => useContext(CourseContext);
