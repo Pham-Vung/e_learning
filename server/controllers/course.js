@@ -64,7 +64,7 @@ export const fetchLecture = TryCatch(async (request, response) => {
         });
     }
 
-    if (!user.subscription.includes(request.params.id)) {
+    if (!user.subscription.includes(lecture.course)) {
         return response.status(400).json({
             message: "You have not subscribed to this course"
         });

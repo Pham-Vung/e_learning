@@ -117,3 +117,34 @@ export const getAllStatus = TryCatch(async (request, response) => {
         status
     });
 });
+
+export const getAllUser = TryCatch(async (request, response) => {
+    const users = await User.find({ _id: { $ne: request.user._id } }).select(
+        "-password"
+    );
+
+    response.json({ users });
+});
+
+export const updateRole = TryCatch(async (request, response) => {
+    const user = await User.findById(request.params.id);
+
+    if (user.role === 'user') {
+        user.role = 'admin';
+        await user.save();
+
+        return response.status(200).json({
+            message: "Role updated to admin"
+        });
+    }
+
+    if (user.role === 'admin') {
+        user.role = 'user';
+        await user.save();
+
+        return response.status(200).json({
+            message: "Role updated"
+        });
+    }
+
+})
