@@ -6,11 +6,17 @@ import { UserData } from '../../context/UserContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * 
+ * @param {user} param0 
+ * @returns Trang thông tin cá nhân của user
+ */
 const Account = ({ user }) => {
     const { setIsAuth, setUser } = UserData();
 
     const navigate = useNavigate();
 
+    // đăng xuất tài khoản
     const logoutHandler = () => {
         localStorage.clear()
         setUser([]);
@@ -35,6 +41,19 @@ const Account = ({ user }) => {
                             <MdDashboard />
                             Dashboard
                         </button>
+
+                        <br />
+
+                        {
+                            user.role === "admin" && (
+                                <button onClick={() => navigate(`/admin/dashboard`)} className='common-btn'>
+                                    <MdDashboard />
+                                    Admin Dashboard
+                                </button>
+                            )
+                        }
+
+                        <br />
 
                         <button
                             className='common-btn logout-btn'

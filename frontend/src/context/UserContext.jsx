@@ -30,7 +30,7 @@ export const UserContextProvider = ({ children }) => {
         } catch (error) {
             setBtnLoading(false);
             setIsAuth(false);
-            toast.error(error.response.data.mesage);
+            toast.error(error.response.data.message);
         }
     }
 
@@ -45,7 +45,7 @@ export const UserContextProvider = ({ children }) => {
             navigate("/verify");
         } catch (error) {
             setBtnLoading(false);
-            toast.error(error.response.data.mesage);
+            toast.error(error.response.data.message);
         }
     }
 
@@ -60,7 +60,7 @@ export const UserContextProvider = ({ children }) => {
             localStorage.clear();
             setBtnLoading(false);
         } catch (error) {
-            toast.error(error.response.data.mesage);
+            toast.error(error.response.data.message);
             setBtnLoading(false);
         }
     }

@@ -3,6 +3,10 @@ import "./auth.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { UserData } from "../../context/UserContext";
 
+/**
+ * 
+ * @returns đăng ký
+ */
 const Register = () => {
   const navigate = useNavigate();
   const { btnLoading, registerUser } = UserData();

@@ -7,9 +7,14 @@ import toast from 'react-hot-toast';
 import { server } from '../../main';
 import axios from "axios";
 
+/**
+ * 
+ * @param {user} lưu trữ thông tin user
+ * @returns kiểm tra trạng thái đơn hàng và thông báo kết quả đơn hàng
+ */
 const PaymentSuccess = ({ user }) => {
     const location = useLocation();
-  
+
     const { fetchUser } = UserData();
     const { fetchCourses, fetchMyCourse } = CourseData();
     const token = localStorage.getItem("token");
@@ -19,30 +24,32 @@ const PaymentSuccess = ({ user }) => {
     const orderId = queryParams.get("orderId");
     const amount = queryParams.get("amount");
 
-    useEffect(() => {
-        const verifyPayment = async () => {
-            try {
-                const { data } = await axios.post(`${server}/api/verification/${courseId}`,
-                    {
-                        orderId: orderId,
-                        amount: amount,
-                        courseId: courseId,
-                    },
-                    {
-                        headers: {
-                            token
-                        }
+    const verifyPayment = async () => {
+        try {
+            const { data } = await axios.post(`${server}/api/verification/${courseId}`,
+                {
+                    orderId: orderId,
+                    amount: amount,
+                    courseId: courseId,
+                },
+                {
+                    headers: {
+                        token
                     }
-                );
+                }
+            );
 
-                await fetchUser();
-                await fetchCourses();
-                await fetchMyCourse();
-                toast.success(data.message);
-            } catch (error) {
-                toast.error(error);
-            }
-        };
+            // render lại thông tin người dùng, tất cả khóa học và khóa học của tôi
+            await fetchUser();
+            await fetchCourses();
+            await fetchMyCourse();
+            toast.success(data.message);
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    };
+
+    useEffect(() => {
         verifyPayment();
     }, []);
 
@@ -51,7 +58,8 @@ const PaymentSuccess = ({ user }) => {
             {user && <div className='success-message'>
                 <h2>Payment successful</h2>
                 <p>Your course subscription has been activated</p>
-                <Link to={`${user.id}/dashboard`} className='common-btn'>Go to dashboard</Link>
+                {/* chuyển sang khóa học của tôi */}
+                <Link to={`/${user.id}/dashboard`} className='common-btn'>Go to dashboard</Link>
             </div>
             }
         </div>

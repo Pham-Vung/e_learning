@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "./home.css";
 import Testimonials from '../../components/testimonials/Testimonials';
 
+/**
+ * 
+ * @returns trang chủ
+ */
+
 const Home = () => {
   const navigate = useNavigate();
 

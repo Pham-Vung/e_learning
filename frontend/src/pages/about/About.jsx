@@ -1,6 +1,11 @@
 import React from 'react';
 import "./about.css";
 
+/**
+ * 
+ * @returns trang giới thiệu website
+ */
+
 const About = () => {
     return (
         <div className='about'>

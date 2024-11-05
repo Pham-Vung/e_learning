@@ -3,6 +3,10 @@ import "./dashbord.css";
 import { CourseData } from '../../context/CourseContext';
 import CourseCard from '../../components/coursecard/CourseCard';
 
+/**
+ * 
+ * @returns khóa học user đã đăng ký
+ */
 const Dashbord = () => {
     const { mycourse } = CourseData();
 

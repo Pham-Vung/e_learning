@@ -7,6 +7,12 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Loading from '../../components/loading/Loading';
 
+/**
+ * 
+ * @param {user} param0 
+ * @returns thông tin khóa học và có thể mua nếu có nhu cầu
+ */
+
 const CourseDescription = ({ user }) => {
     const params = useParams();
     const navigate = useNavigate();
@@ -33,7 +39,7 @@ const CourseDescription = ({ user }) => {
             setLoading(false);
             window.location.href = response.data.payUrl;
         } catch (error) {
-            toast.error(error.data.message);
+            toast.error(error.response.data.message);
             setLoading(false);
         }
     }

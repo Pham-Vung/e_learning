@@ -6,12 +6,18 @@ import { server } from "../../main";
 import Loading from '../../components/loading/Loading';
 import toast from 'react-hot-toast';
 
+/**
+ * 
+ * @param {user} lưu trữ thông tin người dùng
+ * @returns trang bài giảng
+ */
+
 const Lecture = ({ user }) => {
-    const [lectures, setLectures] = useState([]);// lưu trữ bài giảng đã hoàn thành
-    const [lecture, setLecture] = useState([]); // bài giảng đang xem
+    const [lectures, setLectures] = useState([]);// lưu trữ tất cả bài giảng
+    const [lecture, setLecture] = useState([]); // bài giảng tải lên
     const [loading, setLoading] = useState(true);
     const [lecLoading, setLecLoading] = useState(false);// trạng thái khi tạo bài giảng
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false);// show các thông tin để thêm bài giảng đối với admin
     const params = useParams();
 
     const navigate = useNavigate();
@@ -26,6 +32,7 @@ const Lecture = ({ user }) => {
         return navigate("/")
     }
 
+    // lấy ra tất cả bài giảng có trong khóa học
     const fetchLectures = async () => {
         try {
             const { data } = await axios.get(`${server}/api/lectures/${params.id}`, {
@@ -41,7 +48,7 @@ const Lecture = ({ user }) => {
         }
     }
 
-
+    // lấy ra bài giảng theo id
     const fetchLecture = async (id) => {
         setLecLoading(true);
         try {
@@ -58,6 +65,7 @@ const Lecture = ({ user }) => {
         }
     }
 
+    // thêm video
     const changeVideoHandler = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -220,7 +228,8 @@ const Lecture = ({ user }) => {
                                                 >
                                                     Delete {e.title}
                                                 </button>
-                                            )}
+                                            )
+                                        }
                                     </>
                                 ))
                             ) : (

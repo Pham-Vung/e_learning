@@ -3,6 +3,10 @@ import "./courses.css";
 import { CourseData } from '../../context/CourseContext';
 import CourseCard from '../../components/coursecard/CourseCard';
 
+/**
+ * 
+ * @returns tất cả khóa học có trong hệ thống
+ */
 const Courses = () => {
   const { courses } = CourseData();
 
