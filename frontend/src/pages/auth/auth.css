@@ -21,23 +21,27 @@
     margin-bottom: 15px;
 }
 
-form {
+.auth-form form {
     text-align: left;
     display: flex;
     flex-direction: column;
 }
 
-form label {
+.auth-form form label {
     display: block;
     margin-bottom: 5px;
     font-size: 14px;
     color: #333;
 }
 
-form input {
+.auth-form form input {
     flex: 1;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.auth-form p a {
+    color: #17acac;
 }

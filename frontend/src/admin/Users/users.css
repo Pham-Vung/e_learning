@@ -1,8 +1,12 @@
 .users {
-    width: 350px;
+    width: auto;
     overflow-x: auto;
     white-space: nowarp;
     margin: 20px auto;
     min-height: 80vh;
     border: solid gray 1px;
+
+    * {
+        text-align: center;
+    }
 }
