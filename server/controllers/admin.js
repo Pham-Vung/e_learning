@@ -66,7 +66,6 @@ export const deleteLecture = TryCatch(async (request, response) => {
     });
 });
 
-// Biến một hàm callback-based thành một hàm Promise.
 // Ở đây, nó biến hàm fs.unlink (xóa file) thành một hàm có thể sử dụng với async/await
 const unlinkAsync = promisify(fs.unlink);
 

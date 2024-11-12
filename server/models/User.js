@@ -25,6 +25,7 @@ const schema = new mongoose.Schema(
                 ref: "Courses",
             },
         ],
+        resetPasswordExpire: Date,
     },
     {
         timestamps: true

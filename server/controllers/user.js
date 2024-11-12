@@ -1,7 +1,7 @@
 import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import sendMail from "../middlewares/sendMail.js";
+import sendMail, { sendForgotMail } from "../middlewares/sendMail.js";
 import TryCatch from "../middlewares/TryCatch.js";
 
 export const register = TryCatch(async (request, response) => {
@@ -105,7 +105,7 @@ export const loginUser = TryCatch(async (request, response) => {
         });
     }
 
-    const token = jwt.sign({_id: user.id}, process.env.Jwt_Sec, {
+    const token = jwt.sign({ _id: user.id }, process.env.Jwt_Sec, {
         expiresIn: "15d"
     });
 
@@ -116,10 +116,71 @@ export const loginUser = TryCatch(async (request, response) => {
     })
 });
 
-export const myProfile = TryCatch(async(request, response) => {
+export const myProfile = TryCatch(async (request, response) => {
     const user = await User.findById(request.user._id);
 
     response.json({
         user
     });
+});
+
+export const forgotPassword = TryCatch(async (request, response) => {
+    const { email } = request.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return response.status(404).json({
+            message: "No User with this email"
+        });
+    }
+
+    const token = jwt.sign({ email }, process.env.Forgot_Secret);
+
+    const data = { email, token };
+
+    await sendForgotMail("E learning", data);
+
+    user.resetPasswordExpire = Date.now() + 5 * 60 * 1000;
+
+    await user.save();
+
+    response.json({
+        message: "Reset password link is send to you mail"
+    })
+});
+
+export const resetPassword = TryCatch(async (request, response) => {
+    const decodeData = jwt.verify(request.query.token, process.env.Forgot_Secret);
+
+    const user = await User.findOne({ email: decodeData.email });
+
+    if (!user) {
+        return response.status(404).json({
+            message: "No User with this email"
+        });
+    }
+
+    if (user.resetPasswordExpire === null) {
+        return response.status(400).json({
+            message: "Token expired"
+        });
+    }
+
+    if (user.resetPasswordExpire < Date.now()) {
+        return response.status(400).json({
+            message: "Token expired"
+        });
+    }
+
+    const password = await bcrypt.hash(request.body.password, 10);
+
+    user.password = password;
+    user.resetPasswordExpire = null;
+
+    await user.save();
+
+    response.json({
+        message: "Password reset successfully"
+    })
 });
