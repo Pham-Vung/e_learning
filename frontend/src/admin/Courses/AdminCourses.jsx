@@ -156,7 +156,7 @@ const AdminCourses = ({ user }) => {
                                 {
                                     imagePrev && <img src={imagePrev} width={300} />
                                 }
-                                <button type='submit' disabled={btnLoading} className='common-btn'>
+                                <button type='submit' disabled={btnLoading} className='common-btn' style={{ width: '100%' }}>
                                     {btnLoading ? "Please wait..." : "Add"}
                                 </button>
                             </form>

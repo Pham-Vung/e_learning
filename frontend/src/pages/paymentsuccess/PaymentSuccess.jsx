@@ -13,6 +13,7 @@ import axios from "axios";
  * @returns kiểm tra trạng thái đơn hàng và thông báo kết quả đơn hàng
  */
 const PaymentSuccess = ({ user }) => {
+    // const [hasVerified, setHasVerified] = useState(false);
     const location = useLocation();
 
     const { fetchUser } = UserData();
@@ -50,8 +51,12 @@ const PaymentSuccess = ({ user }) => {
     };
 
     useEffect(() => {
-        verifyPayment();
-    }, []);
+        const verified = localStorage.getItem(`verified_${orderId}`);
+        if (!verified && orderId && amount && courseId) {
+            verifyPayment();
+            localStorage.setItem(`verified_${orderId}`, "true");
+        }
+    }, [amount, courseId, orderId]);
 
     return (
         <div className='payment-success-page'>
@@ -64,6 +69,6 @@ const PaymentSuccess = ({ user }) => {
             }
         </div>
     );
-};
+}
 
 export default PaymentSuccess;

@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const AdminUsers = ({ user }) => {
     const navigate = useNavigate();
 
-    if (user && user.role !== "admin") {
+    if (user && user.mainrole !== "superadmin") {
         return navigate("/");
     }
 
@@ -30,9 +30,26 @@ const AdminUsers = ({ user }) => {
     }
 
     const updateRole = async (id) => {
-        if (confirm("Are you sure you want to update this user role")) {
+        if (confirm("Are you sure you want to update this user role?")) {
             try {
                 const { data } = await axios.put(`${server}/api/user/${id}`, {}, {
+                    headers: {
+                        token: localStorage.getItem('token')
+                    }
+                });
+
+                toast.success(data.message);
+                fetchUsers();
+            } catch (error) {
+                toast.error(error.response.data.message);
+            }
+        }
+    }
+
+    const deleteUser = async (id) => {
+        if (confirm('Are you sure you want to delete this user?')) {
+            try {
+                const { data } = await axios.delete(`${server}/api/user/${id}`, {
                     headers: {
                         token: localStorage.getItem('token')
                     }
@@ -62,6 +79,7 @@ const AdminUsers = ({ user }) => {
                             <td>Email</td>
                             <td>Role</td>
                             <td>Update role</td>
+                            <td>Delete user</td>
                         </tr>
                     </thead>
 
@@ -76,9 +94,18 @@ const AdminUsers = ({ user }) => {
                                     <td>
                                         <button
                                             className='common-btn'
-                                            onClick={() => updateRole(e._id)}
+                                            onClick={() => updateRole(e._id)
+                                            }
                                         >
                                             Update role
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            className='common-btn'
+                                            onClick={() => deleteUser(e._id)}
+                                        >
+                                            Delete user
                                         </button>
                                     </td>
                                 </tr>

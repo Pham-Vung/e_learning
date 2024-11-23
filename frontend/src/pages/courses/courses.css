@@ -4,6 +4,30 @@
     min-height: 60vh;
 }
 
+.courses .search-course {
+    input {
+        padding: 24px;
+        width: 400px;
+        text-align: left;
+        padding: 12px;
+        border-radius: 5px;
+        border: 1px solid #17acac;
+        margin-right: 8px;
+    }
+
+    button {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+
+        &:hover {
+            background-color: #17acac;
+            color: white;
+        }
+    }
+   
+}
+
 .courses h2 {
     font-size: 32px;
     color: #17acac;

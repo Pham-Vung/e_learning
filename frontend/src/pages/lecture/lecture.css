@@ -85,3 +85,12 @@ color: #333;
         margin-bottom: 10px;
     }
 }
+
+.progress {
+    width: 20%;
+    background-color: #17acac;
+    border-radius: 5px;
+    padding: 6px;
+    margin: 3px auto;
+    text-align: center;
+}

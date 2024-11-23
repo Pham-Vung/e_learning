@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import { IoHomeSharp } from "react-icons/io5";
 import { FaBook, FaUserAlt } from "react-icons/fa";
 import { AiOutlineLogout } from 'react-icons/ai';
+import { UserData } from '../../context/UserContext';
 
 const Sidebar = () => {
+    const { user } = UserData();
     return (
         <div className='sidebar'>
             <ul>
@@ -25,14 +27,26 @@ const Sidebar = () => {
                         <span>Courses</span>
                     </Link>
                 </li>
-                <li>
-                    <Link to={"/admin/users"}>
+                {
+                    user && user.mainrole === 'superadmin' && (
+                        <li>
+                            <Link to={"/admin/users"}>
+                                <div className="icon">
+                                    <FaUserAlt />
+                                </div>
+                                <span>Users</span>
+                            </Link>
+                        </li>
+                    )
+                }
+                {/* <li>
+                    <Link to={"/account"}>
                         <div className="icon">
-                            <FaUserAlt />
+                            <PiExam />
                         </div>
-                        <span>Users</span>
+                        <span>Exam</span>
                     </Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to={"/account"}>
                         <div className="icon">

@@ -5,6 +5,10 @@
     gap: 1rem;
 
     .left {
+        h1 {
+            text-align: center;
+            color: #17acac;
+        }
         .dashboard-content {
             display: flex;
             justify-content: space-between;

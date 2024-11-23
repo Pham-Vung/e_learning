@@ -20,13 +20,13 @@
     margin-bottom: 10px;
 }
 
-h3 {
+.course-card h3 {
     font-size: 18px;
     color: #333;
     margin-bottom: 10px;
 }
 
-p {
+.course-card p {
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;

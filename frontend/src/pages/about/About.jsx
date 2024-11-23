@@ -9,7 +9,7 @@ import "./about.css";
 const About = () => {
     return (
         <div className='about'>
-            <div className="about-content">
+            <div className="heading">
                 <h2>Học với niềm đam mê để biến ước mơ của bạn thành hiện thực</h2>
                 <p>
                     Ai cũng có ước mơ lớn, và để ước mơ
@@ -17,8 +17,9 @@ const About = () => {
                     bắt tay vào làm tốt từ những điều nhỏ bé nhất
                 </p>
             </div>
+
             <div className="about-main-content">
-                <div className="main-content">
+                <div className="main-content" style={{width: "300px"}}>
                     <img src="https://branium.pro/wp-content/uploads/2022/06/courses-7.jpg" alt="" />
                     <h3>Chúng tôi là ai</h3>
                     <p>Branium là địa chỉ cung cấp các
@@ -33,7 +34,7 @@ const About = () => {
                         và sắp tới có cả Game Unity.
                     </p>
                 </div>
-                <div className="main-content">
+                <div className="main-content" style={{width: "300px"}}>
                     <img src="https://branium.pro/wp-content/uploads/2022/06/courses-4.jpg" alt="" />
                     <h3>Tại sao chúng tôi làm khóa học it?</h3>
                     <p>Sau thời gian dài làm việc tại các công
@@ -53,7 +54,7 @@ const About = () => {
                         lượt ra đời.
                     </p>
                 </div>
-                <div className="main-content">
+                <div className="main-content" style={{width: "300px"}}>
                     <img src="https://branium.pro/wp-content/uploads/2022/06/courses-8.jpg" alt="" />
                     <h3>Sự khác biệt với các khóa học trên thị trường</h3>
                     <p>Thị trường không thiếu các khóa học cả online và offline.

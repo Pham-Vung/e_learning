@@ -29,10 +29,15 @@
             a {
                 display: flex;
                 text-decoration: none;
-                counter-reset: blueviolet;
+                /* counter-reset: blueviolet; */
+
+                div * {
+                    color: blueviolet;
+                }
 
                 span {
                     margin-left: 15px;
+                    color: #333;
 
                     @media (max-width: 46.25em) {
                         display: none;
@@ -47,8 +52,4 @@
     display: flex;
     min-height: 80vh;
     margin-top: 20px;
-
-    /* .content {
-        width: 80%;
-    } */
 }
