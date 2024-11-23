@@ -19,6 +19,10 @@ const schema = new mongoose.Schema(
             type: String,
             default: "user",
         },
+        mainrole: {
+            type: String,
+            default: "user",
+        },
         subscription: [//đã tham gia bao nhiêu khóa học
             {
                 type: mongoose.Schema.Types.ObjectId,

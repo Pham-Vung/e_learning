@@ -5,6 +5,8 @@ import { User } from "../models/User.js";
 import crypto from "crypto";
 import { Payment } from "../models/Payment.js";
 import axios from "axios";
+import { Progress } from "../models/Progress.js";
+
 
 export const getAllCourses = TryCatch(async (request, response) => {
     const courses = await Courses.find();
@@ -212,6 +214,12 @@ export const paymentVerification = TryCatch(async (request, response) => {
         const course = await Courses.findById(courseId);
         user.subscription.push(course._id);
 
+        await Progress.create({
+            course: course._id,
+            completeLectures: [],
+            user: request.user._id
+        });
+
         await user.save();
 
         response.status(200).json({
@@ -222,4 +230,55 @@ export const paymentVerification = TryCatch(async (request, response) => {
             message: "Payment failed"
         })
     }
-})
+});
+
+export const addProgress = TryCatch(async (request, response) => {
+    const progress = await Progress.findOne({
+        user: request.user._id,
+        course: request.query.course
+    });
+
+    const { lectureId } = request.query;
+
+    if (progress.completeLectures.includes(lectureId)) {
+        return response.json({
+            message: "Progress recorded"
+        })
+    }
+
+    progress.completeLectures.push(lectureId);
+
+    await progress.save();
+
+    response.status(201).json({
+        message: "New progress added"
+    });
+});
+
+export const getYourProgress = TryCatch(async (request, response) => {
+    const progress = await Progress.find({
+        user: request.user._id,
+        course: request.query.course
+    });
+
+    if (!progress) {
+        return response.status(404).json({
+            message: "null"
+        });
+    }
+
+    const allLectures = (await Lecture.find({
+        course: request.query.course
+    })).length;
+
+    const completeLectures = progress[0].completeLectures.length;
+
+    const courseProgressPercentage = (completeLectures * 100) / allLectures;
+
+    response.json({
+        courseProgressPercentage,
+        completeLectures,
+        allLectures,
+        progress
+    });
+});

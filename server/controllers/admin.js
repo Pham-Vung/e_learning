@@ -66,6 +66,14 @@ export const deleteLecture = TryCatch(async (request, response) => {
     });
 });
 
+
+// export const updateLecture = TryCatch(async(request, response) => {
+//     const lecture = await Lecture.findByIdAndUpdate(request.params.id, request.body, { new: true });
+//     response.json({
+//         message: "Lecture updated",
+//     });
+// });
+
 // Ở đây, nó biến hàm fs.unlink (xóa file) thành một hàm có thể sử dụng với async/await
 const unlinkAsync = promisify(fs.unlink);
 
@@ -126,6 +134,12 @@ export const getAllUser = TryCatch(async (request, response) => {
 });
 
 export const updateRole = TryCatch(async (request, response) => {
+    if (request.user.mainrole !== "superadmin") {
+        return response.status(403).json({
+            message: "You don't have permission to update this role"
+        });
+    }
+    
     const user = await User.findById(request.params.id);
 
     if (user.role === 'user') {
@@ -145,5 +159,14 @@ export const updateRole = TryCatch(async (request, response) => {
             message: "Role updated"
         });
     }
+});
 
-})
+export const deteteUser = TryCatch(async (request, response) => {
+    const user = await User.findById(request.params.id);
+
+    await user.deleteOne();
+
+    return response.status(200).json({
+        message: "User deleted"
+    });
+});
