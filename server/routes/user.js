@@ -1,5 +1,14 @@
 import express from "express";
-import { forgotPassword, loginUser, myProfile, register, resetPassword, verifyUser } from "../controllers/user.js";
+import {
+    createBlog,
+    forgotPassword,
+    getBlogs,
+    loginUser,
+    myProfile,
+    register,
+    resetPassword,
+    verifyUser
+} from "../controllers/user.js";
 import { isAuth } from "../middlewares/isAuth.js";
 import { addProgress, getYourProgress } from "../controllers/course.js";
 
@@ -13,5 +22,7 @@ router.post("/user/forgot", forgotPassword);
 router.post("/user/reset", resetPassword);
 router.post("/user/progress", isAuth, addProgress);
 router.get("/user/progress", isAuth, getYourProgress);
+router.post("/user/createBlog", isAuth, createBlog);
+router.get("/user/getBlogs", isAuth, getBlogs);
 
 export default router;

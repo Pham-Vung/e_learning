@@ -1,6 +1,7 @@
 import TryCatch from "../middlewares/TryCatch.js";
 import { Courses } from "../models/Courses.js";
 import { Lecture } from "../models/Lecture.js";
+import {Blogs} from "../models/Blogs.js";
 import { rm } from "fs"; // để xóa một tệp hoặc thư mục
 import { promisify } from "util";
 import fs from "fs";
@@ -170,3 +171,13 @@ export const deteteUser = TryCatch(async (request, response) => {
         message: "User deleted"
     });
 });
+
+export const deleteBlog = TryCatch(async (request, response) => {
+    const blog = await Blogs.findById(request.params.id);
+
+    await blog.deleteOne();
+
+    return response.status(200).json({
+        message: "Blog deleted"
+    });
+})

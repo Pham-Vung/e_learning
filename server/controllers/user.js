@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendMail, { sendForgotMail } from "../middlewares/sendMail.js";
 import TryCatch from "../middlewares/TryCatch.js";
+import { Blogs } from "../models/Blogs.js";
 
 export const register = TryCatch(async (request, response) => {
     const { email, name, password } = request.body;
@@ -184,3 +185,25 @@ export const resetPassword = TryCatch(async (request, response) => {
         message: "Password reset successfully"
     })
 });
+
+export const createBlog = TryCatch(async (request, response) => {
+    const { user, name, title, content } = request.body;
+
+    await Blogs.create({
+        owner: user,
+        name: name,
+        title: title,
+        content: content
+    })
+
+    response.json({
+        message: "Blog created successfully"
+    })
+})
+
+export const getBlogs = TryCatch(async (request, response) => {
+    const blogs = await Blogs.find();
+    response.json({
+        blogs
+    })
+})

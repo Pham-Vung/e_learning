@@ -9,6 +9,7 @@ import {
     getAllUser,
     updateRole,
     deteteUser,
+    deleteBlog,
 } from "../controllers/admin.js";
 import { uploadFiles } from "../middlewares/multer.js";
 
@@ -23,5 +24,6 @@ router.get("/status", isAuth, isAdmin, getAllStatus);
 router.put("/user/:id", isAuth, updateRole);
 router.get("/users", isAuth, isAdmin, getAllUser);
 router.delete("/user/:id", isAuth, isAdmin, deteteUser);
+router.delete("/blog/:id", isAuth, isAdmin, deleteBlog);
 
 export default router;
