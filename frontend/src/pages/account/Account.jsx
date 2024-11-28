@@ -2,6 +2,7 @@ import React from 'react';
 import "./account.css";
 import { MdDashboard } from "react-icons/md";
 import { RiLogoutBoxFill } from "react-icons/ri";
+import { TfiWrite } from "react-icons/tfi";
 import { UserData } from '../../context/UserContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -53,8 +54,13 @@ const Account = ({ user }) => {
                             )
                         }
 
-                        <br />
-
+                        <button
+                            className='common-btn'
+                            onClick={() => navigate(`/${user._id}/create-article`)}
+                        >
+                            <TfiWrite />
+                            Blogging
+                        </button>
                         <button
                             className='common-btn logout-btn'
                             onClick={logoutHandler}

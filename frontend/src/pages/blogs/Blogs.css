@@ -1,0 +1,47 @@
+.blogs {
+    margin: 80px 0;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 48px;
+
+    .blog {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        width: 703px;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.5s;
+        padding: 24px;
+    }
+}
+
+.create-container {
+    min-height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .title-input {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .content-input {
+            font-size: 16px;
+            margin-bottom: 12px;
+            width: 300px;
+            height: 200px;
+        }
+    }
+
+}

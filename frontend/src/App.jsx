@@ -22,6 +22,9 @@ import AdminCourses from './admin/Courses/AdminCourses';
 import AdminUsers from './admin/Users/AdminUsers';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import Blogs from './pages/blogs/Blogs';
+import AdminBlogs from './admin/Blogs/AdminBlogs';
+import Create from './pages/blogs/create';
 
 const App = () => {
   const { isAuth, user, loading } = UserData();
@@ -35,6 +38,7 @@ const App = () => {
               <Route path='/' element={<Home />} />
               <Route path='/about' element={<About />} />
               <Route path='/courses' element={<Courses />} />
+              <Route path='/blogs' element={<Blogs />} />
               <Route path='/account' element={isAuth ? <Account user={user} /> : <Login />} />
               <Route path='/login' element={isAuth ? <Home /> : <Login />} />
               <Route path='/register' element={isAuth ? <Home /> : <Register />} />
@@ -44,10 +48,12 @@ const App = () => {
               <Route path='/course/:id' element={isAuth ? <CourseDescription user={user} /> : <Login />} />
               <Route path='/payment-success' element={isAuth ? <PaymentSuccess user={user} /> : <Login />} />
               <Route path="/:id/dashboard" element={isAuth ? <Dashbord user={user} /> : <Login />} />
+              <Route path="/:id/create-article" element={isAuth ? <Create user={user} /> : <Login />} />
               <Route path='/course/study/:id' element={isAuth ? <CourseStudy user={user} /> : <Login />} />
               <Route path='/lectures/:id' element={isAuth ? <Lecture user={user} /> : <Login />} />
               <Route path='/admin/dashboard' element={isAuth ? <AdminDashboard user={user} /> : <Login />} />
               <Route path='/admin/course' element={isAuth ? <AdminCourses user={user} /> : <Login />} />
+              <Route path='/admin/blogs' element={isAuth ? <AdminBlogs user={user} /> : <Login />} />
               <Route path='/admin/users' element={isAuth ? <AdminUsers user={user} /> : <Login />} />
             </Routes>
             <Footer />

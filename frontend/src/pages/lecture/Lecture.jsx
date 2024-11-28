@@ -179,7 +179,7 @@ const Lecture = ({ user }) => {
                     <>
                         {
                             user && user.role === "user" && (
-                                <div className="progress">
+                                <div className="progress" style={{marginTop: '80px'}}>
                                     Lecture completed - {completedLec} out of {lectLength} <br />
                                     <progress value={completed} max={100}></progress> {completed}%
                                 </div>

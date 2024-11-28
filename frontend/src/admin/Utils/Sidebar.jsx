@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { IoHomeSharp } from "react-icons/io5";
 import { FaBook, FaUserAlt } from "react-icons/fa";
 import { AiOutlineLogout } from 'react-icons/ai';
+import { FaMicroblog } from "react-icons/fa";
 import { UserData } from '../../context/UserContext';
 
 const Sidebar = () => {
@@ -39,14 +40,14 @@ const Sidebar = () => {
                         </li>
                     )
                 }
-                {/* <li>
-                    <Link to={"/account"}>
+                <li>
+                    <Link to={"/admin/blogs"}>
                         <div className="icon">
-                            <PiExam />
+                            <FaMicroblog />
                         </div>
-                        <span>Exam</span>
+                        <span>Blogs</span>
                     </Link>
-                </li> */}
+                </li>
                 <li>
                     <Link to={"/account"}>
                         <div className="icon">

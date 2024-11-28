@@ -1,0 +1,13 @@
+.admin-blogs {
+    margin: 0 48px;
+    min-height: 88vh;
+    overflow-y: auto;
+    
+    * {
+        text-align: center;
+    }
+
+    h1 {
+        color: #17acac;
+    }
+}
